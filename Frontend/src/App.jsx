@@ -10,9 +10,9 @@ function App() {
   const [count, setCount] = useState(0);
 
   return (
-    <div className="">
+    <div className="relative ">
       <Header />
-      <main>
+      <main className="py-16">
         <Outlet />
       </main>
       <Footer />

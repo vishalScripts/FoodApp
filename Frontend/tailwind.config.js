@@ -6,6 +6,7 @@ export default {
       colors: {
         navBg: "#FFA3A3",
         customRed: "#E41414",
+        footerBg: "#EFF0F1",
       },
     },
   },

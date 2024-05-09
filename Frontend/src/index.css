@@ -11,3 +11,18 @@
 .inset-shadow {
       box-shadow: inset 4px 4px 4px 0px rgba(0, 0, 0, 0.15);
 }
+
+.home-bg-image{
+  animation: homeAnim 1s  ease-in-out;
+}
+
+@keyframes homeAnim {
+      0% {
+            bottom: 100%;
+      }
+      100% {
+        
+        bottom: -12%;
+      }
+      
+    }
