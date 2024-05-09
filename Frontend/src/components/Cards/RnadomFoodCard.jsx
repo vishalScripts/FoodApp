@@ -33,6 +33,9 @@ function RnadomFoodCard({
       setTimeout(() => {
         setPlaying(true);
       }, 5000);
+      setTimeout(() => {
+        setIsHoverd(true)
+      }, 10000);
     }, []);
     return (
       <div
@@ -62,7 +65,7 @@ function RnadomFoodCard({
              setPlaying(true)}}
           onMouseLeave={() => setIsHoverd(true)}
           className={` text-white bg-opacity-95  bg-slate-700  w-full text-center absolute duration-200 
-               ${isHoverd ? "-bottom-20" : "bottom-0"}
+              ${isHoverd ? "-bottom-20" : "bottom-0"}
           left-1/2 -translate-x-1/2  translate-y-2 flex justify-between items-center flex-row px-4 pb-2`}
         >
           <div className="m-1 text-left">
