@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
+import {Link} from "react-router-dom"
 import Container from "../components/Container/Container";
-import FoodBg from "../assets/FoodBg.jpg";
 import RnadomFood from "../components/RnadomFood";
 import CookingTips from "../components/CookingTips";
+import FoodCard from "../components/Cards/FoodCard.jsx";
+import axios from "axios";
+import Banner from "../components/Banner.jsx";
 
 function Home() {
   const cookingTips = [
@@ -18,8 +21,31 @@ function Home() {
     "To revive stale bread, sprinkle it with water and reheat it in the oven for a few minutes.",
   ];
 
-  console.log(cookingTips);
+  const [meals, setMeals] = useState([])
 
+  useEffect(() => {
+    axios
+      .get(`/api/v1/public/meals?page=${Math.floor(Math.random() * 30 +1)}&limit=12`)
+      .then((res) => {
+        console.log("Response data:", res.data.data.data);
+        setMeals(res.data.data.data);
+      })
+      .catch((err) => console.log("Home Page", err))
+      .finally(() => console.log("meals from finally", meals));
+  }, []);
+
+
+  const containerRef = useRef(null);
+
+  const scrollRight = () => {
+    const container = containerRef.current;
+    container.scrollLeft += 1000; // Adjust the scroll distance as needed
+  };
+
+  const scrollLeft = () => {
+    const container = containerRef.current;
+    container.scrollLeft -= 1000; // Adjust the scroll distance as needed
+  };
   return (
     <>
       <Container>
@@ -30,41 +56,54 @@ function Home() {
           </section>
         </div>
       </Container>
-      <section>
-        <div class="relative bg-cover bg-center bg-black  bg-opacity-40 overflow-hidden text-white py-16 px-4">
-          <div className="w-full h-full bg-red-700 absolute top-0 left-0 -z-10 ">
-            <img
-              src={FoodBg}
-              alt="bg"
-              className=" home-bg-image duration-300 w-full max-w-full object-cover object-center absolute bottom-[-12%]"
-            />
-          </div>
-          <div class="max-w-3xl mx-auto text-center text-orange-400 ">
-            <h2 class="text-4xl font-bold mb-4 text-shadow-lg">
-              Embark on a Culinary Romance
-            </h2>
-            <p class="mb-8">
-              Food isn't just about filling your belly; it's a passionate affair
-              that ignites the senses and kindles the flames of love. From the
-              sizzle of a hot pan to the tantalizing aroma of spices, each dish
-              is a love letter written with flavors.
-            </p>
-            <p class="mb-8">
-              Let's dance in the kitchen, twirling with excitement as we explore
-              new recipes and flavors. With every chop, stir, and sprinkle,
-              we're crafting a symphony of taste that sings of romance and
-              adventure.
-            </p>
-            <p class="mb-8">
-              Join us on this gastronomic journey, where every bite is a kiss
-              and every meal is a celebration of love. Let's create culinary
-              magic together, turning simple ingredients into unforgettable
-              memories that linger on the lips and in the heart.
-            </p>
-          </div>
-        </div>
-      </section>
+      <Banner />
       <Container>
+        <section className="my-4 relative">
+          {/* header */}
+          <div className="">
+            <Link to="/about">
+              <span className="underline meals text-xl cursor-pointer hover:text-customRed duration-200">
+                Meals-{`>`}{" "}
+              </span>
+            </Link>
+          </div>
+          <div
+            className="scroll-container  flex flex-row gap-4 flex-nowrap overflow-x-auto cards scroll-smooth snap-x snap-mandatory"
+            ref={containerRef}
+          >
+            {meals.map((meal, index) => (
+              <FoodCard
+                key={index}
+                className="mb-11 scroll-item snap-start "
+                meal={meal}
+              />
+            ))}
+          </div>
+          <div
+            className="  w-full h-[50%] flex flex-row items-center justify-between absolute top-1/2  -translate-y-1/2 left-0"
+          >
+            <button
+              onClick={scrollLeft}
+              className="px-4 py-2 bg-customRed bg-opacity-25 hover:bg-red-500 duration-300 my-2 text-white rounded-lg"
+            >
+              {`<`}
+            </button>
+            <button
+              onClick={scrollRight}
+              className="px-4 py-2 bg-customRed bg-opacity-25 hover:bg-red-500 duration-300 my-2 text-white rounded-lg"
+            >
+              {`>`}
+            </button>
+          </div>
+          {/* footer */}
+          <div className="absolute bottom-4  right-2">
+            <Link to="/about">
+              <span className=" px-4 py-1  border border-white hover:border-gray-300 rounded-lg  underline-offset-1 underline italic  text-xl cursor-pointer bg-opacity-0 hover:bg-opacity-85 bg-slate-100 hover:text-customRed duration-300">
+                See More&rarr;
+              </span>
+            </Link>
+          </div>
+        </section>
         <section>
           <CookingTips cookingTips={cookingTips} />
         </section>

@@ -13,7 +13,7 @@ function RnadomFoodCard({
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/api/v1/public/meals/meal/random")
+      .get("/api/v1/public/meals/meal/random")
       .then((res) => setMeal(res.data.data))
       .catch((err) =>
         console.log(
@@ -23,11 +23,11 @@ function RnadomFoodCard({
       );
   }, []);
 
-  console.log(meal.strYoutube);
+  
   if (isVideo) {
     const [isHoverd, setIsHoverd] = useState(false)
     const [playing, setPlaying] = useState(false);
-    console.log(playing);
+    
 
     useEffect(() => {
       setTimeout(() => {
@@ -51,7 +51,7 @@ function RnadomFoodCard({
         <div>
           <ReactPlayer
             url={meal.strYoutube}
-            playing={playing}
+            playing={false}
             controls={true}
             muted={true}
             className="max-w-full max-h-full "
