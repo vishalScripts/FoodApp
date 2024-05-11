@@ -3,12 +3,15 @@ import FoodTile from "../components/Cards/FoodTile";
 import Container from "../components/Container/Container";
 import axios from "axios";
 import PagesButton from "../components/Buttons/PagesButton";
+import LayoutIcon from "../components/LayoutIcon";
+import FoodCard from "../components/Cards/FoodCard.jsx";
 
 function Meals() {
   const [meals, setMeals] = useState([]);
   const [mealData, setMealData] = useState({});
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
+  const [layoutGrid, setLayoutGrid] = useState(false)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,20 +33,27 @@ function Meals() {
   }, [page]);
 
   return (
-    <Container>
-      <div className="flex flex-col gap-4 py-10">
-        {meals.map((meal) => (
-          <div key={meal.idMeal}>
-            <FoodTile meal={meal} />
+    <div className="my-4">
+      <Container>
+        <div className="w-full h-6 my-2">
+          <div className="">
+            <LayoutIcon setLayoutGrid={setLayoutGrid} layoutGrid={layoutGrid} />
           </div>
-        ))}
-      </div>
-      <div className="w-full flex justify-center items-center gap-4 ">
-        {[...Array(totalPages)].map((_, index) => (
-          <PagesButton key={index} setPage={setPage} index={index} />
-        ))}
-      </div>
-    </Container>
+        </div>
+        <div className={`flex   ${layoutGrid ? "flex-row flex-wrap" : "flex-col"} gap-4`}>
+          {meals.map((meal) => (
+            <div key={meal.idMeal}>
+              {layoutGrid ? <FoodCard meal={meal} /> : <FoodTile meal={meal} />}
+            </div>
+          ))}
+        </div>
+        <div className="w-full flex justify-center items-center gap-4 ">
+          {[...Array(totalPages)].map((_, index) => (
+            <PagesButton key={index} setPage={setPage} index={index} />
+          ))}
+        </div>
+      </Container>
+    </div>
   );
 }
 
