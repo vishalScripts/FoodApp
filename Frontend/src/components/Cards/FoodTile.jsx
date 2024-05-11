@@ -1,7 +1,7 @@
 import React from 'react'
 import img from "../../assets/FoodBg.jpg";
 import Tags from '../Tags';
-import Button from '../Button';
+import Button from '../Buttons/Button';
 
 function FoodTile({meal, className=""}) {
 
