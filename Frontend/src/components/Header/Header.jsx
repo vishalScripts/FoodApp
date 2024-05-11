@@ -46,7 +46,7 @@ function Header() {
                 </li>
                 <li>
                   <NavLink
-                    to="/about"
+                    to="/meals"
                     className={({ isActive }) =>
                       `${
                         isActive
@@ -55,7 +55,7 @@ function Header() {
                       } duration-200 px-2 rounded-md`
                     }
                   >
-                    About
+                    Meals
                   </NavLink>
                 </li>
                 <li>

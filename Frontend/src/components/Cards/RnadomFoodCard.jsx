@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import ReactPlayer from "react-player/lazy";
 import img from "../../assets/FoodBg.jpg";
 import axios from "axios";
+import Tags from "../Tags";
 
 function RnadomFoodCard({
   content,
@@ -70,20 +71,7 @@ function RnadomFoodCard({
         >
           <div className="m-1 text-left">
             <h1 className="font-bold">{meal.strMeal}</h1>
-            <div className=" flex gap-2 ">
-              <span
-                title="Category"
-                className="text-sm text-gray-100 hover:text-white duration-150  bg-slate-200 bg-opacity-40 flex px-3 rounded-md "
-              >
-                {meal.strCategory}
-              </span>
-              <span
-                title="Area"
-                className="text-sm text-gray-100 hover:text-white duration-150  bg-slate-200 bg-opacity-40 flex px-3 rounded-md "
-              >
-                {meal.strArea}
-              </span>
-            </div>
+            <Tags meal={meal} mode="dark"/>
           </div>
           {/* Button */}
           <div>
@@ -122,20 +110,7 @@ function RnadomFoodCard({
           } left-1/2 -translate-x-1/2 -translate-y-1/2`}
         >
           <h1 className="font-bold">{meal.strMeal}</h1>
-          <div className=" flex gap-2 ">
-            <span
-              title="Category"
-              className="text-sm text-gray-100 hover:text-white duration-150  bg-slate-200 bg-opacity-30 flex px-3 rounded-md "
-            >
-              {meal.strCategory}
-            </span>
-            <span
-              title="Area"
-              className="text-sm text-gray-100 hover:text-white duration-150  bg-slate-200 bg-opacity-30 flex px-3 rounded-md "
-            >
-              {meal.strArea}
-            </span>
-          </div>
+          <Tags meal={meal}  mode="dark"/>
         </div>
       </div>
     );

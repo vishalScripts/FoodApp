@@ -1,7 +1,6 @@
 import React from 'react'
-import img from "../../assets/FoodBg.jpg"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faExternalLinkAlt } from "@fortawesome/free-solid-svg-icons";
+import Button from '../Button';
+import Tags from '../Tags';
 
 function FoodCard({meal ,className=""}) {
 
@@ -30,23 +29,8 @@ function FoodCard({meal ,className=""}) {
         <p className="text-sm text-gray-700 text-wrap">
           {meal.strInstructions.substring(0, 100)}...
         </p>
-        <div className=" flex gap-2 ">
-          <span
-            title="Category"
-            className="text-sm text-gray-950 italic hover:text-gray-900 duration-150  bg-slate-950 bg-opacity-15 flex px-3 rounded-md "
-          >
-            {meal.strCategory}
-          </span>
-          <span
-            title="Area"
-            className="text-sm text-gray-950 italic hover:text-gray-900 duration-150  bg-slate-950 bg-opacity-15 flex px-3 rounded-md "
-          >
-            {meal.strArea}
-          </span>
-        </div>
-        <button className="px-4 py-2 bg-customRed hover:bg-red-500 duration-300 my-2 text-white rounded-lg">
-          Read More <FontAwesomeIcon icon={faExternalLinkAlt} /> 
-        </button>
+        <Tags meal={meal} mode='light' />
+        <Button />
       </div>
     </div>
   );
