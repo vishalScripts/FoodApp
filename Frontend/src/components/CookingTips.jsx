@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUtensils, faHeart } from "@fortawesome/free-solid-svg-icons";
+import { cookingTips } from "./cookingTipsArr";
 
-const CookingTips = ({ cookingTips }) => {
+const CookingTips = () => {
   const [expand, setExpand] = useState(true)
 
   return (
