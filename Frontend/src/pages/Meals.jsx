@@ -7,6 +7,8 @@ import LayoutIcon from "../components/LayoutIcon";
 import FoodCard from "../components/Cards/FoodCard.jsx";
 import Input from "../components/Input.jsx";
 import Button from "../components/Buttons/Button.jsx";
+import sadGif from "../assets/sadFood/sadFood1.gif";
+import sadGif2 from "../assets/sadFood/sadFood2.gif";
 import { Link } from "react-router-dom";
 
 function Meals() {
@@ -60,19 +62,50 @@ function Meals() {
             />
           </div>
         </div>
-        <div
-          className={`flex   ${
-            layoutGrid
-              ? "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
-              : "flex-col"
-          } gap-4 `}
-        >
-          {meals.map((meal) => (
-            <div key={meal.idMeal}>
-              {layoutGrid ? <FoodCard meal={meal} /> : <FoodTile meal={meal} />}
+        {meals.length > 0 ? (
+          <div
+            className={`flex   ${
+              layoutGrid
+                ? "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+                : "flex-col"
+            } gap-4 `}
+          >
+            {meals.map((meal) => (
+              <div key={meal.idMeal}>
+                {layoutGrid ? (
+                  <FoodCard meal={meal} />
+                ) : (
+                  <FoodTile meal={meal} />
+                )}
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="flex flex-col items-center justify-center m-4 p-4 border border-gray-300 rounded-lg">
+            <div>
+              {/* <img src={sadGif} alt="Sad Gif" /> */}
+              <img src={sadGif2} alt="Sad Gif" />
             </div>
-          ))}
-        </div>
+            <h2 className="text-gray-600 text-lg font-semibold">
+              No Meals were found
+            </h2>
+            <p className="text-gray-500 text-center text-sm italic">
+               Ever wondered how long you could survive without food?
+              Surprisingly, the human body can go longer without food than it
+              can without water! While the average person might start feeling
+              the effects of hunger after several hours without eating, it takes
+              about three weeks for the average person to starve to death.
+              However, don't get any ideas about trying out a hunger strike!
+              While the body can survive without food for an extended period,
+              it's certainly not a pleasant experience. Without essential
+              nutrients, energy levels plummet, cognitive function declines, and
+              the risk of serious health complications skyrockets. So, while
+              it's fascinating to ponder our body's resilience, let's remember
+              to nourish ourselves properly and enjoy the wonderful variety of
+              foods available to us!
+            </p>
+          </div>
+        )}
         <div className="w-full flex justify-center items-center gap-4 ">
           {[...Array(totalPages)].map((_, index) => (
             <PagesButton key={index} setPage={setPage} index={index} />
