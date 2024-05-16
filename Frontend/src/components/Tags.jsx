@@ -9,15 +9,15 @@ function Tags({ meal = [], mode = "light", limit = 3 }) {
     }
   }, [meal]);
 
-  const baseClasses = "text-sm italic flex px-3 py-1 rounded-md duration-150";
+  const baseClasses = "text-sm italic flex px-3 py-1 rounded-md duration-150 cursor-pointer ";
   const lightModeClasses = "text-gray-950 bg-gray-200";
   const darkModeClasses = "text-gray-100 bg-gray-600";
   const hoverEffectClasses =
-    "hover:bg-blue-500 hover:text-white hover:scale-105 transform";
+    "hover:bg-navBg hover:text-black hover:scale-105 transform";
 
   const TagSpan = ({ children }) => (
     <span
-      title="Category"
+      title="Search"
       className={`${baseClasses} ${
         mode === "light" ? lightModeClasses : darkModeClasses
       } ${hoverEffectClasses}`}
