@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-function Tags({ meal = [], mode = "light", limit=3 }) {
+function Tags({ meal = [], mode = "light", limit = 3 }) {
   const [tags, setTags] = useState([]);
 
   useEffect(() => {
@@ -9,83 +9,37 @@ function Tags({ meal = [], mode = "light", limit=3 }) {
     }
   }, [meal]);
 
-  
-    if (mode === "light") {
-      return (
-        <div className="flex gap-2">
-          {tags.length > 0 ? (
-            tags.map((value, index) =>
-              index < limit ? (
-                <span
-                  key={index}
-                  title="Category"
-                  className="text-sm  text-gray-950 italic hover:text-gray-900 duration-150 bg-slate-950 bg-opacity-15 flex px-3 rounded-md"
-                >
-                  {value}
-                </span>
-              ) : null
-            )
-          ) : (
-            <>
-              <span
-                
-                title="Category"
-                className="text-sm text-gray-950 italic hover:text-gray-900 duration-150 bg-slate-950 bg-opacity-15 flex px-3 rounded-md"
-              >
-                {meal.strCategory}
-              </span>
-              <span
-                
-                title="Category"
-                className="text-sm text-gray-950 italic hover:text-gray-900 duration-150 bg-slate-950 bg-opacity-15 flex px-3 rounded-md"
-              >
-                {meal.strArea}
-              </span>
-            </>
-          )}
-        </div>
-      );
-    } else if (mode === "dark") {
-      return (
-        <div className="flex gap-2">
-          {tags.length > 0 ? (
-            tags.map((value, index) =>
-              index < limit ? (
-                <span
-                  key={index}
-                  title="Category"
-                  className="text-sm text-gray-100 hover:text-white duration-150 bg-slate-200 bg-opacity-40 flex px-3 rounded-md"
-                >
-                  {value}
-                </span>
-              ) : (
-                ""
-              )
-            )
-          ) : (
-            <>
-              <span
-                
-                title="Category"
-                className="text-sm text-gray-100 hover:text-white duration-150 bg-slate-200 bg-opacity-40 flex px-3 rounded-md"
-              >
-                {meal.strArea}
-              </span>
-              <span
-                
-                title="Category"
-                className="text-sm text-gray-100 hover:text-white duration-150 bg-slate-200 bg-opacity-40 flex px-3 rounded-md"
-              >
-                {meal.strCategory}
-              </span>
-            </>
-          )}
-        </div>
-      );
-    }
-  
+  const baseClasses = "text-sm italic flex px-3 py-1 rounded-md duration-150";
+  const lightModeClasses = "text-gray-950 bg-gray-200";
+  const darkModeClasses = "text-gray-100 bg-gray-600";
+  const hoverEffectClasses =
+    "hover:bg-blue-500 hover:text-white hover:scale-105 transform";
 
-  
+  const TagSpan = ({ children }) => (
+    <span
+      title="Category"
+      className={`${baseClasses} ${
+        mode === "light" ? lightModeClasses : darkModeClasses
+      } ${hoverEffectClasses}`}
+    >
+      {children}
+    </span>
+  );
+
+  return (
+    <div className="flex gap-2">
+      {tags.length > 0 ? (
+        tags
+          .slice(0, limit)
+          .map((value, index) => <TagSpan key={index}>{value}</TagSpan>)
+      ) : (
+        <>
+          <TagSpan>{meal.strCategory}</TagSpan>
+          <TagSpan>{meal.strArea}</TagSpan>
+        </>
+      )}
+    </div>
+  );
 }
 
 export default Tags;

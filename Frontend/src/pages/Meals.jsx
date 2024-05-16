@@ -10,6 +10,7 @@ import Button from "../components/Buttons/Button.jsx";
 import sadGif from "../assets/sadFood/sadFood1.gif";
 import sadGif2 from "../assets/sadFood/sadFood2.gif";
 import { Link } from "react-router-dom";
+import Loader from "../components/Loader.jsx";
 
 function Meals() {
   const [meals, setMeals] = useState([]);
@@ -17,33 +18,36 @@ function Meals() {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [layoutGrid, setLayoutGrid] = useState(false);
-  const [query, setQuery] = useState("")
+  const [query, setQuery] = useState("");
+  const [loading, setLoading] = useState(true); // Add loading state
 
-  const fetchData = async() => {
+  const fetchData = async () => {
+    setLoading(true); // Start loading
     try {
       const response = await axios.get(
         `api/v1/public/meals?page=${page}&limit=50&query=${query}`
       );
-        setMeals(response.data.data.data);
-        setMealData(response.data);
-        setTotalPages(response.data.data.totalPages);
-        // Scroll to the top of the page after setting the meals
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    
+      setMeals(response.data.data.data);
+      setMealData(response.data);
+      setTotalPages(response.data.data.totalPages);
+      setLoading(false); // End loading
+      // Scroll to the top of the page after setting the meals
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      setLoading(false); // End loading on error
+    }
   };
 
-  useEffect(()=>{
-    fetchData()
-  }, [page, query])
+  useEffect(() => {
+    fetchData();
+  }, [page, query]);
 
   const inputRef = useRef(null);
 
   const handleSearchClick = async (e) => {
     setPage(1);
-    setQuery(inputRef.current.value)
+    setQuery(inputRef.current.value);
   };
 
   return (
@@ -62,9 +66,11 @@ function Meals() {
             />
           </div>
         </div>
-        {meals.length > 0  ? (
+        {loading ? ( // Show loader if loading
+          <Loader />
+        ) : meals.length > 0 ? (
           <div
-            className={`flex   ${
+            className={`flex ${
               layoutGrid
                 ? "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
                 : "flex-col"
@@ -80,7 +86,7 @@ function Meals() {
               </div>
             ))}
           </div>
-        ) : (query.length > 0 ? 
+        ) : query.length < 0 ? (
           <div className="flex flex-col items-center justify-center m-4 p-4 border border-gray-300 rounded-lg">
             <div>
               {/* <img src={sadGif} alt="Sad Gif" /> */}
@@ -104,7 +110,9 @@ function Meals() {
               to nourish ourselves properly and enjoy the wonderful variety of
               foods available to us!
             </p>
-          </div> : ""
+          </div>
+        ) : (
+          ""
         )}
         <div className="w-full flex justify-center items-center gap-4 ">
           {[...Array(totalPages)].map((_, index) => (

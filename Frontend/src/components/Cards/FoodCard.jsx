@@ -16,7 +16,7 @@ function FoodCard({meal ,className=""}) {
         />
       </div>
       <div className="p-2 flex flex-col gap-2 justify-between ">
-        {meal.strMeal.length > 28 ? (
+        {meal.strMeal.length > 25 ? (
           <h1 className="text-lg font-semibold text-wrap">
             {meal.strMeal.substring(0, 25)}...
           </h1>
