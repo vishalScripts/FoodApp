@@ -51,7 +51,7 @@ function Home() {
         <section className="my-4 relative">
           {/* header */}
           <div className="">
-            <Link to="/about">
+            <Link to="/meals">
               <span className="underline meals text-xl cursor-pointer hover:text-customRed duration-200">
                 Meals-{`>`}{" "}
               </span>
@@ -87,7 +87,7 @@ function Home() {
           </div>
           {/* footer */}
           <div className="absolute bottom-4  right-2">
-            <Link to="/about">
+            <Link to="/meals">
               <span className=" px-4 py-1  border border-white hover:border-gray-300 rounded-lg  underline-offset-1 underline italic  text-xl cursor-pointer bg-opacity-0 hover:bg-opacity-85 bg-slate-100 hover:text-customRed duration-300">
                 See More&rarr;
               </span>

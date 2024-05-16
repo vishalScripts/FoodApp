@@ -62,7 +62,7 @@ function Meals() {
             />
           </div>
         </div>
-        {meals.length > 0 ? (
+        {meals.length > 0  ? (
           <div
             className={`flex   ${
               layoutGrid
@@ -80,7 +80,7 @@ function Meals() {
               </div>
             ))}
           </div>
-        ) : (
+        ) : (query.length > 0 ? 
           <div className="flex flex-col items-center justify-center m-4 p-4 border border-gray-300 rounded-lg">
             <div>
               {/* <img src={sadGif} alt="Sad Gif" /> */}
@@ -90,7 +90,7 @@ function Meals() {
               No Meals were found
             </h2>
             <p className="text-gray-500 text-center text-sm italic">
-               Ever wondered how long you could survive without food?
+              Ever wondered how long you could survive without food?
               Surprisingly, the human body can go longer without food than it
               can without water! While the average person might start feeling
               the effects of hunger after several hours without eating, it takes
@@ -104,7 +104,7 @@ function Meals() {
               to nourish ourselves properly and enjoy the wonderful variety of
               foods available to us!
             </p>
-          </div>
+          </div> : ""
         )}
         <div className="w-full flex justify-center items-center gap-4 ">
           {[...Array(totalPages)].map((_, index) => (

@@ -2,6 +2,7 @@ import React from 'react'
 import img from "../../assets/FoodBg.jpg";
 import Tags from '../Tags';
 import Button from '../Buttons/Button';
+import { Link, useNavigate } from "react-router-dom";
 
 function FoodTile({meal, className=""}) {
 
@@ -24,13 +25,14 @@ function FoodTile({meal, className=""}) {
           <div className="w-full h-full overflow-hidden flex ">
             <p className="text-sm text-gray-700 text-wrap relative">
               {meal.strInstructions}
-              
             </p>
           </div>
         </div>
         <div className=" w-full h-[30%] flex flex-row justify-between items-center ">
-          <Tags meal={meal}/>
-          <Button />
+          <Tags meal={meal || meal} limit={99} />
+          <Link to={`/recipe/${meal.id}`}>
+            <Button />
+          </Link>
         </div>
       </div>
     </div>
