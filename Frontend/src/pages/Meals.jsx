@@ -148,13 +148,13 @@ function Meals() {
         ) : (
           ""
         )}
-        <div className="w-full flex justify-center items-center gap-4 ">
-          {[...Array(totalPages)].map((_, index) =>
-            index > 1 ? (
+        {totalPages > 1 && (
+          <div className="w-full flex justify-center items-center gap-4">
+            {[...Array(totalPages)].map((_, index) => (
               <PagesButton key={index} setPage={setPage} index={index} />
-            ) : null
-          )}
-        </div>
+            ))}
+          </div>
+        )}
       </Container>
     </div>
   );
