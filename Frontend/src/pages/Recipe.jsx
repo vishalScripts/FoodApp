@@ -9,7 +9,7 @@ import { faExternalLinkAlt, faPrint } from "@fortawesome/free-solid-svg-icons";
 
 function Recipe() {
   const { mealId } = useParams();
-  const [meal, setMeal] = useState([]);
+  const [meal, setMeal] = useState({});
   console.log(mealId, "Meal Id from Recipe Comp");
 
   const fetchData = async () => {
@@ -23,21 +23,19 @@ function Recipe() {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [mealId]);
+
   const handlePrint = () => {
     window.print();
   };
 
-  console.log(
-    Object.keys(meal)
-      .filter(
-        // meal[key]: This part checks if the corresponding value of the key is truthy. If the value exists and is not falsy (like null, undefined, 0, "", etc.), it returns true.
-        (key) => key.includes("strIngredient") && meal[key]
-      )
-      .map((key) =>
-        console.log(meal[key], "-", meal[`strMeasure${key.slice(-1)}`])
-      )
-  );
+  // Split instructions based on "Step" or "STEP"
+  //! Checkout Notes.md from line1st to line 23rd
+  const instructions = meal.strInstructions
+    ? meal.strInstructions.split(/(?:Step|STEP)\s?\d*[:.-]?\s*/)
+    : [];
+  console.log("Instructions Steps:", instructions);
+
   return (
     <div className="py-10">
       <Container>
@@ -47,31 +45,41 @@ function Recipe() {
               <img
                 src={meal.strMealThumb}
                 alt="mealImg"
-                className=" aspect-video  h-[70vh] object-center object-cover"
+                className="aspect-video h-[70vh] object-center object-cover"
               />
             </div>
           </div>
           <div className="flex flex-col gap-2">
             <h1 className="text-3xl font-semibold">{meal.strMeal}</h1>
-            <p>{meal.strInstructions}</p>
+            {instructions.length > 1 ? (
+              instructions.slice(1).map((val, index) => (
+                <p key={index} >
+                  {" "}
+                  <span className="font-semibold "> {`STEP ${index + 1}: `}</span>
+                  {`${val.trim()}`}
+                </p>
+              ))
+            ) : (
+              <p>{meal.strInstructions}</p>
+            )}
             <div>
               <Tags meal={meal} />
             </div>
             <div>
               <p className="text-gray-800">
-                <span className="font-bold text-black">Category-</span>
+                <span className="font-bold text-black">Category- </span>
                 {meal.strCategory}
               </p>
               <p className="text-gray-800">
-                <span className="font-bold text-black">Area-</span>
+                <span className="font-bold text-black">Area- </span>
                 {meal.strArea}
               </p>
             </div>
           </div>
-          {/* TAble */}
-          <div className="w-4/5 flex items-center ">
-            <table className="w-full border border-collapse text-black ">
-              <thead className="bg-gray-200 ">
+          {/* Table */}
+          <div className="w-4/5 flex items-center">
+            <table className="w-full border border-collapse text-black">
+              <thead className="bg-gray-200">
                 <tr>
                   <th className="py-2 px-4 border">Ingredient</th>
                   <th className="py-2 px-4 border">Measure</th>
@@ -81,8 +89,8 @@ function Recipe() {
                 {Object.keys(meal)
                   .filter((key) => key.includes("strIngredient") && meal[key])
                   .map((key) => (
-                    <tr key={key} className=" border">
-                      <td className="py-2 px-4 border w-1/4 ">{meal[key]}</td>
+                    <tr key={key} className="border">
+                      <td className="py-2 px-4 border w-1/4">{meal[key]}</td>
                       <td className="py-2 px-4 border w-4/5">
                         {meal[`strMeasure${key.slice(-1)}`]}
                       </td>
@@ -99,7 +107,7 @@ function Recipe() {
               url={meal.strYoutube}
             />
           </div>
-          <div className=" flex flex-row gap-4 items-center">
+          <div className="flex flex-row gap-4 items-center">
             <button
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
               onClick={handlePrint}
@@ -108,10 +116,10 @@ function Recipe() {
             </button>
             <a
               target="_blank"
+              rel="noopener noreferrer"
               href={meal.strSource}
               className="underline text-blue-700"
             >
-              {" "}
               Source <FontAwesomeIcon icon={faExternalLinkAlt} />
             </a>
           </div>

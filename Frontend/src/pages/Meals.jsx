@@ -86,7 +86,7 @@ function Meals() {
               </div>
             ))}
           </div>
-        ) : query.length < 0 ? (
+        ) : query.length > 0 ? (
           <div className="flex flex-col items-center justify-center m-4 p-4 border border-gray-300 rounded-lg">
             <div>
               {/* <img src={sadGif} alt="Sad Gif" /> */}
