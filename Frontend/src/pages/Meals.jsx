@@ -46,7 +46,10 @@ function Meals() {
     }
   };
 
+  // Always remember localStorage returns String
   useEffect(() => {
+    const savedLayoutGrid = localStorage.getItem("layoutGrid") === "true";
+    setLayoutGrid(savedLayoutGrid);
     fetchData();
   }, [page, query]);
 
@@ -60,6 +63,8 @@ function Meals() {
   // const handleGoBack = () =>{
   //     dispatch(clearQuery());
   // }
+
+  
 
   return (
     <div className="my-10">

@@ -20,3 +20,7 @@ const instructions = meal.strInstructions
 - `\d*`: Matches zero or more digits. This handles steps that may be numbered, such as "Step 1", "Step 2", etc.
 - `[:.-]?`: Matches an optional colon, period, or hyphen. This handles different punctuation that may follow the step number.
 - `\s*`: Matches zero or more whitespace characters. This ensures that any spaces following the punctuation are also accounted for.
+
+#
+
+## Always Remember `LocalStorage` returns String
