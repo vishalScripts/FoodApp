@@ -1,7 +1,16 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import {useDispatch} from "react-redux"
+import { setQuery } from "../store/searchQuerySlice"; 
 
 function Tags({ meal = [], mode = "light", limit = 3 }) {
   const [tags, setTags] = useState([]);
+  const dispatch = useDispatch()
+
+  const hnadleClick = (children)=>{
+    console.log(children,"Query Children")
+    dispatch(setQuery(children))
+  }
 
   useEffect(() => {
     if (meal.strTags) {
@@ -16,14 +25,19 @@ function Tags({ meal = [], mode = "light", limit = 3 }) {
     "hover:bg-navBg hover:text-black hover:scale-105 transform";
 
   const TagSpan = ({ children }) => (
-    <span
-      title="Search"
-      className={`${baseClasses} ${
-        mode === "light" ? lightModeClasses : darkModeClasses
-      } ${hoverEffectClasses}`}
-    >
-      {children}
-    </span>
+    <Link to={`/meals`}>
+      <span
+        onClick={() => {
+          hnadleClick(children);
+        }}
+        title="Search"
+        className={`${baseClasses} ${
+          mode === "light" ? lightModeClasses : darkModeClasses
+        } ${hoverEffectClasses}`}
+      >
+        {children}
+      </span>
+    </Link>
   );
 
   return (

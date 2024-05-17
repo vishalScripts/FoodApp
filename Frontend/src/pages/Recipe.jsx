@@ -53,9 +53,12 @@ function Recipe() {
             <h1 className="text-3xl font-semibold">{meal.strMeal}</h1>
             {instructions.length > 1 ? (
               instructions.slice(1).map((val, index) => (
-                <p key={index} >
+                <p key={index}>
                   {" "}
-                  <span className="font-semibold "> {`STEP ${index + 1}: `}</span>
+                  <span className="font-semibold ">
+                    {" "}
+                    {`STEP ${index + 1}: `}
+                  </span>
                   {`${val.trim()}`}
                 </p>
               ))
@@ -89,7 +92,10 @@ function Recipe() {
                 {Object.keys(meal)
                   .filter((key) => key.includes("strIngredient") && meal[key])
                   .map((key) => (
-                    <tr key={key} className="border">
+                    <tr
+                      key={key}
+                      className="border odd:bg-white even:bg-slate-50"
+                    >
                       <td className="py-2 px-4 border w-1/4">{meal[key]}</td>
                       <td className="py-2 px-4 border w-4/5">
                         {meal[`strMeasure${key.slice(-1)}`]}

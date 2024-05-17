@@ -11,6 +11,9 @@ import sadGif from "../assets/sadFood/sadFood1.gif";
 import sadGif2 from "../assets/sadFood/sadFood2.gif";
 import { Link } from "react-router-dom";
 import Loader from "../components/Loader.jsx";
+import {useDispatch, useSelector} from "react-redux"
+import { setQuery, clearQuery } from "../store/searchQuerySlice.js";
+
 
 function Meals() {
   const [meals, setMeals] = useState([]);
@@ -18,14 +21,18 @@ function Meals() {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [layoutGrid, setLayoutGrid] = useState(false);
-  const [query, setQuery] = useState("");
+  // const [query, setQuery] = useState("");
+  const query = useSelector((state)=> state.searchQuery)
+  const dispatch = useDispatch()
+  
   const [loading, setLoading] = useState(true); // Add loading state
 
   const fetchData = async () => {
     setLoading(true); // Start loading
+    inputRef.current.value = query.query;
     try {
       const response = await axios.get(
-        `api/v1/public/meals?page=${page}&limit=50&query=${query}`
+        `api/v1/public/meals?page=${page}&limit=50&query=${query.query}`
       );
       setMeals(response.data.data.data);
       setMealData(response.data);
@@ -47,8 +54,12 @@ function Meals() {
 
   const handleSearchClick = async (e) => {
     setPage(1);
-    setQuery(inputRef.current.value);
+    dispatch(setQuery(inputRef.current.value));
   };
+
+  // const handleGoBack = () =>{
+  //     dispatch(clearQuery());
+  // }
 
   return (
     <div className="my-10">
@@ -57,7 +68,23 @@ function Meals() {
           <div className="">
             <LayoutIcon setLayoutGrid={setLayoutGrid} layoutGrid={layoutGrid} />
           </div>
-          <div className="w-9/12 flex flex-row justify-end items-center ">
+          <div className="w-9/12 flex  flex-row justify-end items-center ">
+            {query.query.length > 0 ? (
+              <div className="w-1/2 justify-start flex items-center  ">
+                {" "}
+                <Button
+                  // Go Back button Refresh the meals page
+                  handleClick={() => {
+                    dispatch(clearQuery());
+                  }}
+                  content="Explore More"
+                  className="mx-5 justify-self-start"
+                />{" "}
+              </div>
+            ) : (
+              <></>
+            )}
+
             <Input refrance={inputRef} className="h-10 w-64" button="" />
             <Button
               handleClick={handleSearchClick}
@@ -86,7 +113,7 @@ function Meals() {
               </div>
             ))}
           </div>
-        ) : query.length > 0 ? (
+        ) : query.query.length > 0 ? (
           <div className="flex flex-col items-center justify-center m-4 p-4 border border-gray-300 rounded-lg">
             <div>
               {/* <img src={sadGif} alt="Sad Gif" /> */}
@@ -116,7 +143,9 @@ function Meals() {
         )}
         <div className="w-full flex justify-center items-center gap-4 ">
           {[...Array(totalPages)].map((_, index) => (
+            index > 1 ?
             <PagesButton key={index} setPage={setPage} index={index} />
+            : null
           ))}
         </div>
       </Container>

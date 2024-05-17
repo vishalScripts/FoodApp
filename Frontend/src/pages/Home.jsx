@@ -58,7 +58,7 @@ function Home() {
             </Link>
           </div>
           <div
-            className="scroll-container  flex flex-row gap-4 flex-nowrap overflow-x-auto cards scroll-smooth snap-x snap-mandatory"
+            className="scroll-container z-30  flex flex-row gap-4 flex-nowrap overflow-x-auto cards scroll-smooth snap-x snap-mandatory"
             ref={containerRef}
           >
             {meals.map((meal, index) => (
@@ -70,17 +70,17 @@ function Home() {
             ))}
           </div>
           <div
-            className="  w-full h-[50%] flex flex-row items-center justify-between absolute top-1/2  -translate-y-1/2 left-0"
+            className="  w-full h-[10%] flex flex-row items-center justify-between absolute top-1/2  -translate-y-1/2 left-0"
           >
             <button
               onClick={scrollLeft}
-              className="px-4 py-2 bg-customRed bg-opacity-25 hover:bg-red-500 duration-300 my-2 text-white rounded-lg"
+              className="px-4 z-50 py-2 bg-customRed bg-opacity-25 hover:bg-red-500 duration-300 my-2 text-white rounded-lg"
             >
               {`<`}
             </button>
             <button
               onClick={scrollRight}
-              className="px-4 py-2 bg-customRed bg-opacity-25 hover:bg-red-500 duration-300 my-2 text-white rounded-lg"
+              className="px-4 py-2 z-0 bg-customRed bg-opacity-25 hover:bg-red-500 duration-300 my-2 text-white rounded-lg"
             >
               {`>`}
             </button>
