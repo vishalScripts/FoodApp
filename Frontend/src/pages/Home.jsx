@@ -15,7 +15,7 @@ function Home() {
 
   useEffect(() => {
     axios
-      .get(`/api/v1/public/meals?page=${Math.floor(Math.random() * 30 +1)}&limit=12`)
+      .get(`/api/v1/public/meals?page=${Math.floor(Math.random() * 30 +1)}&limit=18`)
       .then((res) => {
         console.log("Response data:", res.data.data.data);
         setMeals(res.data.data.data);

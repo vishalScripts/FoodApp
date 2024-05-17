@@ -122,31 +122,33 @@ function Meals() {
             <h2 className="text-gray-600 text-lg font-semibold">
               No Meals were found
             </h2>
-            <p className="text-gray-500 text-center text-sm italic">
-              Ever wondered how long you could survive without food?
-              Surprisingly, the human body can go longer without food than it
-              can without water! While the average person might start feeling
-              the effects of hunger after several hours without eating, it takes
-              about three weeks for the average person to starve to death.
-              However, don't get any ideas about trying out a hunger strike!
-              While the body can survive without food for an extended period,
-              it's certainly not a pleasant experience. Without essential
-              nutrients, energy levels plummet, cognitive function declines, and
-              the risk of serious health complications skyrockets. So, while
-              it's fascinating to ponder our body's resilience, let's remember
-              to nourish ourselves properly and enjoy the wonderful variety of
-              foods available to us!
+            <p className="text-gray-500  text-sm italic">
+              Aw snap! Looks like our food filters are on a snoozefest vacation
+              today. No worries, though! The world of yummy is a vast and
+              glorious place, overflowing with surprises waiting to be gobbled
+              (or spooned, or forked!).
+            </p>
+            <p className="text-gray-500  text-sm italic">
+              Let's try a{" "}
+              <span
+                onClick={() => inputRef.current.focus()}
+                className="cursor-pointer text-blue-600 underline font-serif font-extralight"
+              >
+                new search
+              </span>{" "}
+              adventure and see what hidden gems we can unearth. You might just
+              discover your new favorite flavor fiesta!
             </p>
           </div>
         ) : (
           ""
         )}
         <div className="w-full flex justify-center items-center gap-4 ">
-          {[...Array(totalPages)].map((_, index) => (
-            index > 1 ?
-            <PagesButton key={index} setPage={setPage} index={index} />
-            : null
-          ))}
+          {[...Array(totalPages)].map((_, index) =>
+            index > 1 ? (
+              <PagesButton key={index} setPage={setPage} index={index} />
+            ) : null
+          )}
         </div>
       </Container>
     </div>
