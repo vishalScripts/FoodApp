@@ -12,9 +12,9 @@ import { Link } from "react-router-dom";
 function Footer() {
   return (
     <>
-      <footer className="bg-footerBg">
+      <footer className="bg-footerBg ">
         <Container>
-          <div className="flex flex-row justify-between p-6 ">
+          <div className="flex flex-row justify-between p-6  ">
             {/* col-1 */}
             <div className=" flex flex-col items-center max-w-[20%] ">
               <div>
@@ -48,11 +48,9 @@ function Footer() {
                 </li>
                 <li>
                   <Link to="/about">About Us</Link>
-                  
                 </li>
                 <li>
                   <Link to="/services">Services</Link>
-                  
                 </li>
                 <li>
                   <Link to="/contact">Contact</Link>

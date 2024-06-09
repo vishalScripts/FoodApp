@@ -8,7 +8,7 @@ function FoodTile({meal, className=""}) {
 
   
   return (
-    <div className=" flex flex-row  w-full h-52  rounded-xl  border p-2 border-blue-300">
+    <div className=" flex flex-row bg-white  w-full h-52  rounded-xl  border p-2 border-blue-300">
       {/* image */}
       <div className=" w-1/3 min-w-1/3">
         <div className="w-full h-full rounded-lg overflow-hidden border border-gray-200">

@@ -5,14 +5,14 @@ function Banner() {
   return (
     <section>
       <div class="relative bg-cover bg-center bg-black  bg-opacity-40 overflow-hidden text-white py-16 px-4">
-        <div className="w-full h-full bg-red-700 absolute top-0 left-0 -z-10 overflow-hidden ">
+        <div className="w-full h-full bg-red-700 absolute top-0 left-0 -z-20  overflow-hidden ">
           <img
             src={FoodBg}
             alt="bg"
             className=" home-bg-image duration-300 w-full max-w-full object-cover object-center absolute  bottom-[-12%] "
           />
         </div>
-        <div class="max-w-3xl mx-auto text-center text-orange-400 ">
+        <div class="max-w-3xl mx-auto text-center text-orange-400  ">
           <h2 class="text-4xl font-bold mb-4 text-shadow-lg">
             Embark on a Culinary Romance
           </h2>

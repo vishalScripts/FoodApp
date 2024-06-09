@@ -59,3 +59,10 @@
 .glow-background {
   animation: glow 1.5s infinite alternate;
 }
+
+html {
+  scroll-behavior: smooth;
+}
+
+
+/* For Crazy Comp */

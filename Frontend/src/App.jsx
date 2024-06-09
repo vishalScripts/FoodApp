@@ -1,16 +1,18 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+import viteLogo from "./assets/grainTexture.png"; // Adjust the path to your SVG file
 import "./App.css";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import { Outlet } from "react-router-dom";
+import { useState } from "react";
 
 function App() {
-  const [count, setCount] = useState(0);
+  
 
   return (
-    <div className="relative ">
+    <div
+      className="relative bg-slate-100   "
+      style={{ backgroundImage: `url(${viteLogo})` }} // Correct usage of backgroundImage
+    >
       <Header />
       <main className="py-16">
         <Outlet />
