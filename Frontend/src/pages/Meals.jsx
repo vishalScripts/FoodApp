@@ -15,6 +15,7 @@ import { setQuery, clearQuery } from "../store/searchQuerySlice.js";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import Sidebar from "../components/SideBar/Sidebar.jsx";
+import Categories from "../components/Categories.jsx";
 
 function Meals() {
   const [meals, setMeals] = useState([]);
@@ -65,29 +66,23 @@ function Meals() {
   return (
     <div className="mt-8">
       <Container>
-        <div className="flex  relative">
-          {/* <Sidebar /> */}
-
-          <div className="w-full">
-            <div className="w-full h-6 my-6 flex flex-row items-center justify-between">
-              <div>
+        <div className="flex relative">
+          {/* Sidebar can be added here */}
+          <div className="w-full flex flex-col">
+            <div className="w-full  h-auto my-6 flex items-center justify-between">
+              {/* Column 1 */}
+              <div className="w-[5%]  flex-shrink-0">
                 <LayoutIcon
                   setLayoutGrid={setLayoutGrid}
                   layoutGrid={layoutGrid}
                 />
               </div>
-              <div className="w-9/12 flex flex-row justify-end items-center">
-                {query.query.length > 0 ? (
-                  <div className="w-1/2 justify-start flex items-center">
-                    <Button
-                      handleClick={() => {
-                        dispatch(clearQuery());
-                      }}
-                      content="Explore More"
-                      className="mx-5 justify-self-start"
-                    />
-                  </div>
-                ) : null}
+              {/* Column 2 */}
+              <div className=" w-[68%] h-[100%]  flex items-center justify-center">
+                <Categories />
+              </div>
+              {/* Column 3 */}
+              <div className="w-[25%] flex-shrink-0 flex items-center justify-end">
                 <Input refrance={inputRef} className="h-10 w-64" button="" />
                 <Button
                   handleClick={handleSearchClick}

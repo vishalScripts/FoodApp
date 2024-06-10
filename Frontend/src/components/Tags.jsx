@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import {useDispatch} from "react-redux"
 import { setQuery } from "../store/searchQuerySlice"; 
 
-function Tags({ meal = [], mode = "light", limit = 3 }) {
+function Tags({ meal = [], mode = "light", limit = 3, catogries=null, className="", }) {
   const [tags, setTags] = useState([]);
   const dispatch = useDispatch()
 
@@ -13,7 +13,10 @@ function Tags({ meal = [], mode = "light", limit = 3 }) {
   }
 
   useEffect(() => {
-    if (meal.strTags) {
+    if (catogries) {
+      setTags(catogries);
+    }
+    else if (meal.strTags) {
       setTags(meal.strTags.split(","));
     }
   }, [meal]);
@@ -41,7 +44,7 @@ function Tags({ meal = [], mode = "light", limit = 3 }) {
   );
 
   return (
-    <div className="flex gap-2">
+    <div className={`flex gap-2 ${className}`}>
       {tags.length > 0 ? (
         tags
           .slice(0, limit)
