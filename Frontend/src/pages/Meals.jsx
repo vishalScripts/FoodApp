@@ -11,7 +11,7 @@ import sadGif from "../assets/sadFood/sadFood1.gif";
 import sadGif2 from "../assets/sadFood/sadFood2.gif";
 import Loader from "../components/Loader.jsx";
 import { useDispatch, useSelector } from "react-redux";
-import { setQuery, clearQuery } from "../store/searchQuerySlice.js";
+import { setQuery, clearQuery, setPage } from "../store/searchQuerySlice.js";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import Sidebar from "../components/SideBar/Sidebar.jsx";
@@ -21,7 +21,7 @@ import { Link } from "react-router-dom";
 function Meals() {
   const [meals, setMeals] = useState([]);
   const [mealData, setMealData] = useState({});
-  const [page, setPage] = useState(1);
+  const page = (useSelector((state) => state.searchQuery)).page;
   const [totalPages, setTotalPages] = useState(0);
   const [layoutGrid, setLayoutGrid] = useState(false);
   const [showBackBtn, setShowBackBtn] = useState(false);
@@ -62,19 +62,22 @@ function Meals() {
   const inputRef = useRef(null);
 
   const handleSearchClick = () => {
-    setPage(1);
+    // setPage(1);
     dispatch(setQuery(inputRef.current.value));
     // setShowBackBtn(true)
   };
 
+  //* For pagination 
   const handleChange = (event, value) => {
-    setPage(value);
+    dispatch(setPage(value));
   };
 
   const handleBackButtonClick = ()=>{
     setShowBackBtn(false)
     dispatch(setQuery(""));
   }
+
+  console.log("page",page)
 
   return (
     <div className="mt-0 ">

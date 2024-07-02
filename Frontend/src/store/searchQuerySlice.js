@@ -1,7 +1,8 @@
 import {createSlice} from "@reduxjs/toolkit"
 
 const initialState = {
-  query: ""
+  query: "",
+  page: 1
 }
 
 const searchQuerySlice = createSlice({
@@ -14,9 +15,14 @@ const searchQuerySlice = createSlice({
     clearQuery: (state, action) => {
       state.query = "";
     },
+    setPage: (state, action) => {
+      console.log("pagefghgfhfgh", action.payload);
+      state.page = action.payload;
+    },
+    
   },
 });
 
-export const {setQuery, clearQuery} = searchQuerySlice.actions
+export const {setQuery, clearQuery, setPage} = searchQuerySlice.actions
 
 export default searchQuerySlice.reducer
