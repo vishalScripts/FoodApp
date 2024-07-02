@@ -5,6 +5,7 @@ import axios from "axios";
 import Tags from "../Tags";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "../Buttons/Button";
+import { faL } from "@fortawesome/free-solid-svg-icons";
 
 
 function RnadomFoodCard({
@@ -78,7 +79,11 @@ function RnadomFoodCard({
         >
           <div className="m-1 text-left w-full">
             <h1 className="font-bold">{meal.strMeal}</h1>
-            <Tags meal={meal || meal} mode="dark" />
+            <Tags
+              meal={meal || meal}
+              mode="dark"
+              className="items-center w-auto"
+            />
           </div>
           {/* Button */}
           <div className="w-full h-full flex items-center justify-end">
@@ -86,6 +91,14 @@ function RnadomFoodCard({
               <Button content="See The Recipe" className="inline-block" />
             </Link>
           </div>
+        </div>
+
+        {/* Hover to play */}
+
+        <div className={`w-full ${playing ? "hidden" : ""} bg-slate-100 bg-opacity-15 flex items-center justify-center h-full absolute top-0 left-0`}>
+          <p className="text-white bg-slate-200 bg-opacity-15 px-6 py-4 rounded-sm">
+            Hover to play{" "}
+          </p>
         </div>
       </div>
     );

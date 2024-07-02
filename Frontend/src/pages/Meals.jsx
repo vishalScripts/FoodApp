@@ -16,6 +16,7 @@ import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import Sidebar from "../components/SideBar/Sidebar.jsx";
 import Categories from "../components/Categories.jsx";
+import { Link } from "react-router-dom";
 
 function Meals() {
   const [meals, setMeals] = useState([]);
@@ -23,7 +24,7 @@ function Meals() {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [layoutGrid, setLayoutGrid] = useState(false);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [showBackBtn, setShowBackBtn] = useState(false);
   const query = useSelector((state) => state.searchQuery);
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
@@ -50,6 +51,12 @@ function Meals() {
     const savedLayoutGrid = localStorage.getItem("layoutGrid") === "true";
     setLayoutGrid(savedLayoutGrid);
     fetchData();
+
+    console.log("Qurry", query.query)
+
+    if (query.query !== ""){
+      setShowBackBtn(true)
+    }
   }, [page, query]);
 
   const inputRef = useRef(null);
@@ -57,19 +64,40 @@ function Meals() {
   const handleSearchClick = () => {
     setPage(1);
     dispatch(setQuery(inputRef.current.value));
+    // setShowBackBtn(true)
   };
 
   const handleChange = (event, value) => {
     setPage(value);
   };
 
+  const handleBackButtonClick = ()=>{
+    setShowBackBtn(false)
+    dispatch(setQuery(""));
+  }
+
   return (
-    <div className="mt-8">
+    <div className="mt-0 ">
       <Container>
-        <div className="flex relative">
-          {/* Sidebar can be added here */}
+        {showBackBtn ? (
+          <Link to={"/meals"}>
+            {" "}
+            <span
+              onClick={handleBackButtonClick}
+              className="underline-offset-4 underline text-sm  cursor-pointer hover:text-customRed duration-200"
+            >
+              {`<`}-Back
+            </span>{" "}
+          </Link>
+        ) : (
+          ""
+        )}
+
+        <div className="flex relative ">
+          {/* TOP BAR */}
+
           <div className="w-full flex flex-col">
-            <div className="w-full  h-auto my-6 flex items-center justify-between">
+            <div className="w-full  h-auto mb-5 flex items-center justify-between">
               {/* Column 1 */}
               <div className="w-[5%]  flex-shrink-0">
                 <LayoutIcon

@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 function FoodCard({meal ,className=""}) {
   return (
     <div
-      className={`w-[300px] bg-white hover:border-blue-500  min-w-[300px] border border-gray-500 scroll-snap-align-start rounded-lg overflow-hidden ${className}`}
+      className={`w-[300px] bg-white hover:border-customRed  min-w-[300px] border border-gray-500 scroll-snap-align-start rounded-lg overflow-hidden ${className}`}
     >
       <div>
         <img

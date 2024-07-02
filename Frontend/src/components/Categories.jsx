@@ -44,29 +44,43 @@ function Categories() {
   };
 
   return (
-    <div className="w-full h-10  bg-gray-700 py-4  flex items-center justify-center rounded-md">
-      <button
-        onClick={scrollLeft}
-        className="px-2 z-50 bg-gray-600 bg-opacity-25 hover:bg-gray-400 duration-300 m-2 text-white rounded-sm"
-      >
-        {`<`}
-      </button>
-      <div
-        ref={containerRef}
-        className="w-full overflow-x-auto scroll-smooth no-scrollbar"
-      >
-        <Tags
-          catogries={foodCategories}
-          mode="dark"
-          limit={foodCategories.length + 1}
-        />
+    <div className="bg-gray-700 relative flex-col flex items-center justify-center w-full rounded-t-lg">
+      <div className="w-full h-10  bg-gray-700 py-4 flex items-center justify-center rounded-md">
+        <button
+          onClick={scrollLeft}
+          className="px-2 z-50 bg-gray-600 bg-opacity-25 hover:bg-gray-400 duration-300 m-2 text-white rounded-sm"
+        >
+          {`<`}
+        </button>
+        <div
+          ref={containerRef}
+          className="w-full overflow-x-auto scroll-smooth no-scrollbar"
+        >
+          <Tags
+            catogries={foodCategories}
+            mode="dark"
+            limit={foodCategories.length + 1}
+          />
+        </div>
+        <button
+          onClick={scrollRight}
+          className="px-2 z-50 bg-gray-600 bg-opacity-25 hover:bg-gray-400 duration-300 m-2 text-white rounded-sm"
+        >
+          {`>`}
+        </button>
       </div>
-      <button
-        onClick={scrollRight}
-        className="px-2 z-50 bg-gray-600 bg-opacity-25 hover:bg-gray-400 duration-300 m-2 text-white rounded-sm"
-      >
-        {`>`}
-      </button>
+
+      <div className=" w-full h-3 group absolute -bottom-3 bg-gray-500 rounded-b-sm left-0  flex items-center justify-center cursor-pointer">
+        <span className="rotate-90 group-hover:opacity-0 text-xl text-black">{`>`}</span>
+        <div className=" w-full  cursor-pointer group-hover:inline-block hidden overflow-hidden duration-200 top-1/2 absolute px-4 rounded-b-lg  bg-gradient-to-r bg-gray-500 to-bg-gray-700 z-50">
+          <Tags
+            catogries={foodCategories}
+            mode="dark"
+            limit={foodCategories.length + 1}
+            className="h-auto w-full flex-wrap my-4 items-center justify-start"
+          />
+        </div>
+      </div>
     </div>
   );
 }

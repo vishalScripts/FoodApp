@@ -6,6 +6,7 @@ import Tags from "../components/Tags";
 import ReactPlayer from "react-player/lazy";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faExternalLinkAlt, faPrint } from "@fortawesome/free-solid-svg-icons";
+import {Link} from "react-router-dom"
 
 function Recipe() {
   const { mealId } = useParams();
@@ -39,6 +40,11 @@ function Recipe() {
   return (
     <div className="py-10">
       <Container>
+        <Link to={"/meals"}>
+          <span className="underline-offset-4 underline text-sm  cursor-pointer hover:text-customRed duration-200">
+            {`<`}-Back
+          </span>
+        </Link>
         <div className="flex flex-col gap-6 items-center">
           <div className="">
             <div className="w-full flex items-center justify-center">

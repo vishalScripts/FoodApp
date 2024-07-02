@@ -10,7 +10,7 @@ function App() {
 
   return (
     <div
-      className="relative bg-slate-100   "
+      className="relative bg-slate-100 z-30   "
       style={{ backgroundImage: `url(${viteLogo})` }} // Correct usage of backgroundImage
     >
       <Header />
