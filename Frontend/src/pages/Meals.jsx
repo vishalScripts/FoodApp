@@ -102,14 +102,14 @@ function Meals() {
           <div className="w-full flex flex-col">
             <div className="w-full  h-auto mb-5 flex items-center justify-between">
               {/* Column 1 */}
-              <div className="w-[5%]  flex-shrink-0">
+              <div className="w-[3%]  flex-shrink-0">
                 <LayoutIcon
                   setLayoutGrid={setLayoutGrid}
                   layoutGrid={layoutGrid}
                 />
               </div>
               {/* Column 2 */}
-              <div className=" w-[68%] h-[100%]  flex items-center justify-center">
+              <div className=" w-[70%] h-[100%]  flex items-center justify-center">
                 <Categories />
               </div>
               {/* Column 3 */}
