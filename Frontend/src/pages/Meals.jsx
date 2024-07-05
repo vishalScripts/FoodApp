@@ -114,7 +114,7 @@ function Meals() {
               </div>
               {/* Column 3 */}
               <div className="w-[25%] flex-shrink-0 flex items-center justify-end">
-                <Input refrance={inputRef} className="h-10 w-64" button="" />
+                <Input ref={inputRef} className="h-10 w-64" button="" />
                 <Button
                   handleClick={handleSearchClick}
                   content="Search"
