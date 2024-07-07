@@ -2,22 +2,27 @@ import React from "react";
 import { Container } from "../components/index";
 import bgImg from "../assets/pexels-vojtech-okenka-127162-1055272.jpg";
 import { Link } from "react-router-dom";
-import { login } from "../services/authService";
+import { login, signup } from "../services/authService";
 import { useForm } from "react-hook-form";
 import {Input, Button} from "../components/index"
 import WarningIcon from "@mui/icons-material/Warning";
 import GoogleIcon from "../assets/google.svg"
 import GithubIcon from "../assets/github.svg"
+import { useCookies } from "react-cookie";
 
 
 function Signup() {
 
   const { register, handleSubmit } = useForm();
+  
+
 
   const signupFunc = async (data) => {
+    // setCookie("name", "VIshal KUmar");
+    
     console.log("clicked");
-    console.log(data);
-    const log = await login({ ...data });
+    // console.log(data);
+    const log = await signup({ ...data });
     console.log(log);
   };
   return (
