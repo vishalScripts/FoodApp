@@ -11,6 +11,8 @@ import {Provider} from "react-redux"
 import store from './store/store.js'
 import Login from "./pages/Login.jsx";
 import Signup from "./pages/Signup.jsx";
+import {CookiesProvider} from "react-cookie"
+import Protected from "./components/AuthLayout.jsx";
 
 const router = createBrowserRouter([
   {
@@ -27,19 +29,37 @@ const router = createBrowserRouter([
       },
       {
         path: "/recipe/:mealId",
-        element: <Recipe />,
+        element: (
+          <Protected>
+            <Recipe />
+          </Protected>
+        ),
       },
       {
         path: "/meals/recipe/:mealId",
-        element: <Recipe />,
+        element: (
+          <Protected>
+            {" "}
+            <Recipe />{" "}
+          </Protected>
+        ),
       },
       {
         path: "/login",
-        element: <Login />,
+        element: (
+          <Protected>
+            <Login />
+          </Protected>
+        ),
       },
       {
         path: "/signup",
-        element: <Signup />,
+        element: (
+          <Protected authentication={false}>
+            {" "}
+            <Signup />{" "}
+          </Protected>
+        ),
       },
     ],
   },
@@ -47,8 +67,10 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <Provider store={store}>
-      <RouterProvider router={router} />
-    </Provider>
+    <CookiesProvider defaultSetOptions={{ path: "/" }}>
+      <Provider store={store}>
+        <RouterProvider router={router} />
+      </Provider>
+    </CookiesProvider>
   </React.StrictMode>
 );
