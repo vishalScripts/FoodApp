@@ -6,6 +6,7 @@ import QuoteComp from "../QuoteComp";
 import { useSelector } from "react-redux";
 import LoginIcon from "@mui/icons-material/Login";
 import loginIcon from "../../assets/loginIcon.svg";
+import { burgerPfp } from "../../assets/PfpBg";
 
 function Header() {
   const [userAvatar, setUserAvatar] = useState("");
@@ -91,15 +92,13 @@ function Header() {
                   to={userStatus ? "/profile" : "/login"}
                   className={({ isActive }) =>
                     `${
-                      isActive
-                        ? "border-2 border-orange-400  "
-                        : " hover:border-2 border-orange-400 border-opacity-25"
-                    } duration-75  inline-block rounded-full w-8 h-8`
+                      isActive ? " shadow-lg shadow-orange-400 " : "   "
+                    }group  border-4 border-transparent duration-75  inline-block rounded-full w-8 h-8 relative`
                   }
                 >
                   {userStatus ? (
                     <div
-                      className={`  w-full h-full overflow-hidden rounded-full bg-orange-400 border-red-100 border`}
+                      className={`group-hover:scale-110 z-50 relative  w-full h-full overflow-hidden rounded-full bg-orange-400 border-red-100 border duration-200`}
                     >
                       <img
                         alt="userAvatar"
@@ -110,7 +109,7 @@ function Header() {
                   ) : (
                     <div
                       title="login"
-                      className="shadow-sm shadow-orange-500  w-full h-full aspect-square overflow-hidden rounded-full bg-white border-red-100 border flex items-center justify-center hover:bg-slate-100 duration-200 relative"
+                      className="group-hover:scale-110  z-50 shadow-sm shadow-orange-500  w-full h-full aspect-square overflow-hidden rounded-full bg-white border-red-100 border flex items-center justify-center hover:bg-slate-100 duration-200 relative"
                     >
                       <img
                         alt="Login Logo"
@@ -119,6 +118,14 @@ function Header() {
                       />
                     </div>
                   )}
+
+                  <div className="group-hover:rotate-180 duration-500 z-40 absolute w-12 h-12  top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 ">
+                    <img
+                      src={burgerPfp}
+                      alt="burger"
+                      className="w-full h-full"
+                    />
+                  </div>
                 </NavLink>
               </div>
             </div>
