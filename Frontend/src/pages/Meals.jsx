@@ -17,11 +17,13 @@ import Stack from "@mui/material/Stack";
 import Sidebar from "../components/SideBar/Sidebar.jsx";
 import Categories from "../components/Categories.jsx";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 function Meals() {
   const [meals, setMeals] = useState([]);
   const [mealData, setMealData] = useState({});
-  const page = (useSelector((state) => state.searchQuery)).page;
+  const page = useSelector((state) => state.searchQuery).page;
   const [totalPages, setTotalPages] = useState(0);
   const [layoutGrid, setLayoutGrid] = useState(false);
   const [showBackBtn, setShowBackBtn] = useState(false);
@@ -52,10 +54,10 @@ function Meals() {
     setLayoutGrid(savedLayoutGrid);
     fetchData();
 
-    console.log("Qurry", query.query)
+    console.log("Qurry", query.query);
 
-    if (query.query !== ""){
-      setShowBackBtn(true)
+    if (query.query !== "") {
+      setShowBackBtn(true);
     }
   }, [page, query]);
 
@@ -67,17 +69,17 @@ function Meals() {
     // setShowBackBtn(true)
   };
 
-  //* For pagination 
+  //* For pagination
   const handleChange = (event, value) => {
     dispatch(setPage(value));
   };
 
-  const handleBackButtonClick = ()=>{
-    setShowBackBtn(false)
+  const handleBackButtonClick = () => {
+    setShowBackBtn(false);
     dispatch(setQuery(""));
-  }
+  };
 
-  console.log("page",page)
+  console.log("page", page);
 
   return (
     <div className="mt-0 ">
@@ -113,13 +115,17 @@ function Meals() {
                 <Categories />
               </div>
               {/* Column 3 */}
-              <div className="w-[25%] flex-shrink-0 flex items-center justify-end">
+              <div className="w-[25%] flex-shrink-0 flex items-center  justify-end">
                 <Input ref={inputRef} className="h-10 w-64" button="" />
                 <Button
                   handleClick={handleSearchClick}
                   content="Search"
-                  className="mx-5"
-                />
+                  classname="mx-5 px-6"
+                >
+                  <>
+                    <FontAwesomeIcon icon={faSearch} />
+                  </>
+                </Button>
               </div>
             </div>
             {loading ? (

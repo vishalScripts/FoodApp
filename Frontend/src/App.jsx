@@ -17,7 +17,7 @@ function App() {
       style={{ backgroundImage: `url(${viteLogo})` }} 
     >
       <Header />
-      <main className="mt-14 relative">
+      <main className="mt-16 relative">
         <Outlet />
       </main>
       {/* Conditionally render the Footer */}

@@ -10,7 +10,6 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     authLogin: (state, action) => {
-      console.log("Helllo mother fucker")
       state.user = action.payload
       state.status = true
     },

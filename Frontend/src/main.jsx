@@ -13,6 +13,7 @@ import Login from "./pages/Login.jsx";
 import Signup from "./pages/Signup.jsx";
 import {CookiesProvider} from "react-cookie"
 import Protected from "./components/AuthLayout.jsx";
+import Profile from "./pages/Profile.jsx";
 
 const router = createBrowserRouter([
   {
@@ -58,6 +59,15 @@ const router = createBrowserRouter([
           <Protected authentication={false}>
             {" "}
             <Signup />{" "}
+          </Protected>
+        ),
+      },
+      {
+        path: "/profile",
+        element: (
+          <Protected authentication>
+            {" "}
+            <Profile />{" "}
           </Protected>
         ),
       },

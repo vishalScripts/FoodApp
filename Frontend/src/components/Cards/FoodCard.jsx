@@ -1,9 +1,9 @@
-import React from 'react'
-import Button from '../Buttons/Button';
-import Tags from '../Tags';
+import React from "react";
+import Button from "../Buttons/Button";
+import Tags from "../Tags";
 import { Link, useNavigate } from "react-router-dom";
 
-function FoodCard({meal ,className=""}) {
+function FoodCard({ meal, className = "" }) {
   return (
     <div
       className={`w-[300px] bg-white hover:border-customRed  min-w-[300px] border border-gray-500 scroll-snap-align-start rounded-lg overflow-hidden ${className}`}
@@ -29,11 +29,11 @@ function FoodCard({meal ,className=""}) {
         </p>
         <Tags meal={meal || meal} mode="light" />
         <Link to={`/recipe/${meal.id}`}>
-          <Button className="w-full" meal={meal} />
+          <Button classname="w-full" meal={meal} />
         </Link>
       </div>
     </div>
   );
 }
 
-export default FoodCard
+export default FoodCard;

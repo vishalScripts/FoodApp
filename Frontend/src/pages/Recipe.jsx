@@ -6,7 +6,8 @@ import Tags from "../components/Tags";
 import ReactPlayer from "react-player/lazy";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faExternalLinkAlt, faPrint } from "@fortawesome/free-solid-svg-icons";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom";
+import ScrollAnimation from "react-animate-on-scroll";
 
 function Recipe() {
   const { mealId } = useParams();
@@ -51,11 +52,15 @@ function Recipe() {
               <img
                 src={meal.strMealThumb}
                 alt="mealImg"
-                className="aspect-video h-[70vh] object-center object-cover"
+                className="aspect-video h-[70vh] object-center object-cover hover:scale-105 duration-700"
               />
             </div>
           </div>
+
           <div className="flex flex-col gap-2">
+            <ScrollAnimation animateIn="fadeIn">
+              dfdjsfhdjkshfjkdhfjdhfjkdshfjkhsdjkfhsdjkhfjksdhfjkdhfjkhsdjkfhsdjkhfjksdhfjkdhsfjkhdsjkfhdsjkfhsdjkhfjkdhfjkhsdjkfhsdjkfhdsjkfh
+            </ScrollAnimation>
             <h1 className="text-3xl font-semibold">{meal.strMeal}</h1>
             {instructions.length > 1 ? (
               instructions.slice(1).map((val, index) => (
